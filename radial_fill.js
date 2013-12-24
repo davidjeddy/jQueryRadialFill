@@ -1,81 +1,98 @@
 <!--//
 //Start plugin
+//wrap in namespace to be safe.
 (function($){
     
+    //Start jQ plugin
     $.fn.rotator = function(options){
 
         var settings = $.extend({
             starting: 0,
             ending: 100,
-            percentage: true,
-            color: 'green',
             lineWidth: 7,
             timer: 10,
-            radius: 40,
+            radius: 125,
+            percentage: true,
+            show_text: true,
+            color: 'green',
             fontStyle: 'Calibri',
             fontSize: '20pt',
             fontColor: 'darkblue',
             backgroundColor: 'lightgray',
-            callback: function () {
-            }
+            callback: function () {}
         }, options);
 
         this.empty().append("<canvas height ="+this.height()+" width="+this.width()+" id='rotator-canvas'/ ></canvas>");
 
+        //Get the canvas tag and assign to a local var
         var canvas = document.getElementById('rotator-canvas');
+        var context = canvas.getContext("2d");
+        var step = settings.starting;
+        var steps = settings.ending - settings.starting;
         var x = canvas.width / 2;
         var y = canvas.height / 2;
-        var radius = settings.radius;
-        var context = canvas.getContext("2d");
-
-        if(settings.backgroundColor){
-            var ctx = canvas.getContext('2d');
-            ctx.arc(x, y, radius, 0, 2*Math.PI, false);
-            ctx.strokeStyle = settings.backgroundColor;
-            ctx.lineWidth = settings.lineWidth;
-            ctx.stroke()
-        }
-
-        var steps = settings.ending - settings.starting;
-        var step = settings.starting;
-
         var z = setInterval(function() {
-
-            var text;
-            var start_angle = (1.5 + (step/(steps*0.5)))*Math.PI;
-            var end_angle = (1.5 + (++step/(steps*0.5)))*Math.PI;
-
-            if(settings.percentage) { text = step + "%" } else { text = step };
-
+            //Canvas math(s)
+            //TODO Needs work. Need 'min','start_point','end_point','max'.
             context.beginPath();
-            context.arc(x, y, radius, start_angle, end_angle, false);
+            context.arc(
+                x, y, settings.radius,
+                (1.5 + (step/(steps*0.5)))*Math.PI,
+                (1.5 + (++step/(steps*0.5)))*Math.PI,
+                false
+            );
             context.lineWidth = settings.lineWidth;
             context.strokeStyle = settings.color;
             context.stroke();
             context.font = settings.fontSize + ' ' + settings.fontStyle;
-            context.textAlign = 'center';
-            context.textBaseline = 'middle';
             context.fillStyle = settings.fontColor;
-            context.clearRect(x - parseInt(settings.fontSize)*1.5, y - parseInt(settings.fontSize)/2, parseInt(settings.fontSize)*3, parseInt(settings.fontSize));
-            context.fillText(text, x , y );
+            context.clearRect(
+                x - parseInt(settings.fontSize)*1.5,
+                y - parseInt(settings.fontSize)/2,
+                parseInt(settings.fontSize)*3,
+                parseInt(settings.fontSize)
+            );
+
+            //show text?
+            if (settings.show_text) {
+                //Now to handle the text changes
+                var text;
+                //Do we use the % with the text?
+                if (settings.percentage) { text = step + "%" } else { text = step };
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                context.fillText(text, x , y );
+            }
             
+            //Incriment a fill step
             if (step >= steps) {
                 window.clearInterval(z);
 
                 if(settings.percentage) { text = step + "%" } else { text = step };
 
-                context.clearRect(x - parseInt(settings.fontSize)*1.5, y - parseInt(settings.fontSize)/2, parseInt(settings.fontSize)*3, parseInt(settings.fontSize));
+                context.clearRect(
+                    x - parseInt(settings.fontSize)*1.5,
+                    y - parseInt(settings.fontSize)/2,
+                    parseInt(settings.fontSize)*3,
+                    parseInt(settings.fontSize)
+                );
                 context.fillText(text, x , y );
 
                 if (typeof(settings.callback) == 'function') {
                     settings.callback.call(this);
                 }
             }
-
         }, settings.timer)
+
+        //Set the radial background pre filled (also be blank for non)
+        if (settings.backgroundColor) {           
+            context.arc(x, y, settings.radius, 0, (2*Math.PI), false);
+            context.strokeStyle = settings.backgroundColor;
+            context.lineWidth   = settings.lineWidth;
+            context.stroke();
+        };
     }
 }(jQuery));
-// plugin end
 
 
 
@@ -91,7 +108,7 @@ function setpb(){
 //Example of executing the animation on DOM ready
 $(document).ready(function(){
 
-     $('#rotator').rotator({
+    $('#rotator').rotator({
         starting: 0,
         ending: 100,
         lineWidth: 50,
