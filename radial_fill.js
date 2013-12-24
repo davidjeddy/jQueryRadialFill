@@ -67,9 +67,6 @@
             //Incriment a fill step
             if (step >= steps) {
                 window.clearInterval(z);
-
-                if(settings.percentage) { text = step + "%" } else { text = step };
-
                 context.clearRect(
                     x - parseInt(settings.fontSize)*1.5,
                     y - parseInt(settings.fontSize)/2,
