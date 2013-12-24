@@ -10,7 +10,7 @@
             starting: 0,
             ending: 100,
             lineWidth: 7,
-            timer: 10,
+            timer: 1000,        //1000 = 1 second
             radius: 125,
             percentage: true,
             show_text: true,
@@ -64,7 +64,7 @@
                 context.fillText(text, x , y );
             }
             
-            //Incriment a fill step
+            //Incriment the fill animation
             if (step >= steps) {
                 window.clearInterval(z);
                 context.clearRect(
