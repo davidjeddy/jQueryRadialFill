@@ -16,7 +16,12 @@ Copyright:
 David Eddy, 2013. All right reserved.
 
 Install:
-copy/paste
+./devel = umcompressed script
+./prod  = compressed, prod ready
+./examples = js + html example
 
 Credits:
 TheApptracker & dev @ http://stackoverflow.com/questions/18916251/jquery-fill-circle-based-on-value
+
+Todo:
+jUnit tests

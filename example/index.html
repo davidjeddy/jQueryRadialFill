@@ -1,0 +1,30 @@
+<!DocTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+	    #rotator {
+	    	height:300px;
+	    	width:300px
+	    }
+    </style>
+</head>
+<body>
+
+	<!--// dimensions can not be in % -->
+    <div id="rotator">
+        <canvas id="rotator-canvas"></canvas>
+    </div>
+    
+    <!--// example value form -->
+    <p>Change start and end values:</p>
+    <input type="text"       id="startval" /> 
+    <input type="text"       id="endval" /> 
+    <input type="button"     value="Go!" onClick="setpb()" />
+
+    <!--// jQuery CDN -->
+    <script language="javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!--/ plugin script -->
+    <script language="javascript" src="radial_fill.js"></script>
+</body>
+</html>
