@@ -10,7 +10,7 @@
             starting: 0,
             ending: 100,
             lineWidth: 7,
-            timer: 1000,        //1000 = 1 second
+            timer: 10,        //1000 = 1 second
             radius: 125,
             percentage: true,
             show_text: true,
@@ -39,8 +39,7 @@
                 x, y, settings.radius,
                 (1.5 + (step/(steps*0.5)))*Math.PI,
                 (1.5 + (++step/(steps*0.5)))*Math.PI,
-                false
-            );
+                false);
             context.lineWidth = settings.lineWidth;
             context.strokeStyle = settings.color;
             context.stroke();
@@ -50,8 +49,7 @@
                 x - parseInt(settings.fontSize)*1.5,
                 y - parseInt(settings.fontSize)/2,
                 parseInt(settings.fontSize)*3,
-                parseInt(settings.fontSize)
-            );
+                parseInt(settings.fontSize));
 
             //show text?
             if (settings.show_text) {
@@ -73,16 +71,19 @@
                     parseInt(settings.fontSize)*3,
                     parseInt(settings.fontSize)
                 );
-                context.fillText(text, x , y );
+                
+                //setting.show_text if false, do not show a complete message
+                if (settings.show_text) { context.fillText(text, x , y );
+                } else { context.fillText('', x , y ); }
 
                 if (typeof(settings.callback) == 'function') {
                     settings.callback.call(this);
                 }
             }
-        }, settings.timer)
+        }, settings.timer);
 
         //Set the radial background pre filled (also be blank for non)
-        if (settings.backgroundColor) {           
+        if (settings.backgroundColor) {
             context.arc(x, y, settings.radius, 0, (2*Math.PI), false);
             context.strokeStyle = settings.backgroundColor;
             context.lineWidth   = settings.lineWidth;
@@ -95,6 +96,7 @@
 
 //Example function call to run the fill animation
 function setpb(){
+
     $('#rotator').rotator({
         starting: $("#startval").val(),
         ending: $("#endval").val(),
