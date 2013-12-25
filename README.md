@@ -24,4 +24,4 @@ Credits:
 TheApptracker & dev @ http://stackoverflow.com/questions/18916251/jquery-fill-circle-based-on-value
 
 Todo:
-jUnit tests
+JUnit tests, redo radial math.
