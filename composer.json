@@ -1,0 +1,25 @@
+{
+    "name": "davidjeddy/jQueryRadialFill",
+    "description": "jRadial / Dial Fill Canvas Animation",
+    "type": "library",
+    "keywords": [
+        "jQuery",
+        "canvas",
+        "animation"
+    ],
+    "homepage": "http://www.davidjeddy.com",
+    "license": "Creative Common 4",
+    "authors": [
+        {
+            "name": "David J Eddy",
+            "email": "me@davidjeddy.com",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/davidjeddy/jQueryRadialFill/issues"
+    },
+    "require": {
+        "jquery/jquery": ">=1.9.0"
+    }
+}
