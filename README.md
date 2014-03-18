@@ -25,3 +25,6 @@ TheApptracker & dev @ http://stackoverflow.com/questions/18916251/jquery-fill-ci
 
 Todo:
 JUnit tests, redo radial math.
+
+Goat:
+Yes. Playing with pull requests.
